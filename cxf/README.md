@@ -1,5 +1,7 @@
 # CXF Samples
 
+Latest Travis-Build of all samples (see [.travis.yml](../.travis.yml)) [![Build Status](https://travis-ci.org/masooh/samples.svg?branch=master)](https://travis-ci.org/masooh/samples)
+
 ## Client and local Endpoint based on WSDL
 
 - Based on [hello_world.wsdl](src/main/resources/hello_world.wsdl) located in `src/main/resources`. 
