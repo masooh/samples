@@ -1,9 +1,10 @@
 package com.github.masooh.samples;
 
+import static org.junit.Assert.assertEquals;
+
 import javax.inject.Inject;
 
 import org.apache.hello_world_soap_http.Greeter;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -20,6 +21,6 @@ public class JaxWsClientTest {
     @Test
     public void simpleCall() {
         final String hi = greeter.sayHi();
-        Assert.assertEquals(hi, "Hi from Greeter");
+        assertEquals(hi, "Hi from Greeter");
     }
 }
