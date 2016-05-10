@@ -13,6 +13,7 @@
             <groupId>org.mock-server</groupId>
             <artifactId>mockserver-netty</artifactId>
             <version>RELEASE</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -24,6 +25,7 @@
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
             <version>RELEASE</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 </project>

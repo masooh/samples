@@ -21,7 +21,6 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockserver.client.server.MockServerClient;
-import org.mockserver.integration.ClientAndServer;
 import org.mockserver.junit.MockServerRule;
 import org.mockserver.mock.action.ExpectationCallback;
 import org.mockserver.model.HttpRequest;
@@ -41,7 +40,7 @@ public class CallbackTest {
 
     @Before
     public void resetServer() throws Exception {
-        port = ((ClientAndServer) mockServerClient).getPort();
+        port = mockServerRule.getPort();
         baseUri = "http://localhost:" + port;
 
         mockServerClient.reset();
@@ -137,8 +136,8 @@ public class CallbackTest {
             list.add("1");
         }
 
-        public static HttpResponse created = response().withStatusCode(CREATED_201.code());
-        public static HttpResponse conflict = response().withStatusCode(CONFLICT_409.code());
+        static HttpResponse created = response().withStatusCode(CREATED_201.code());
+        static HttpResponse conflict = response().withStatusCode(CONFLICT_409.code());
 
         public HttpResponse handle(HttpRequest httpRequest) {
             if (httpRequest.getMethod().getValue().equalsIgnoreCase("post")) {
