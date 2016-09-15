@@ -4,6 +4,7 @@ jdk:
   - oraclejdk7
 env:
   - SAMPLE=cxf
+  - SAMPLE=spock
 script: "cd $SAMPLE && mvn --errors --batch-mode clean verify"
 notifications:
     email:
