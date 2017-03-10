@@ -5,6 +5,7 @@ jdk:
 env:
   - SAMPLE=cxf
   - SAMPLE=spock
+  - SAMPLE=xmlunit
 script: "cd $SAMPLE && mvn --errors --batch-mode clean verify"
 notifications:
     email:
