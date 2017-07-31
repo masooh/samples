@@ -4,11 +4,11 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-public class CalcTest {
+public class CalcPlusJavaTest {
     @Test
     public void add() throws Exception {
         Calc calc = new Calc();
-        int sum = calc.add(3, 5);
+        int sum = calc.plus(3, 5);
         assertEquals(8, sum);
     }
 

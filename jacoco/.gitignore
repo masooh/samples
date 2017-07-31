@@ -1,10 +1,4 @@
 .idea
 jacoco.iml
 target
-Würde .gitignore löschen
-Würde .idea/ löschen
-Würde README.md löschen
-Würde jacoco.iml löschen
-Würde pom.xml löschen
-Würde src/ löschen
-Würde target/ löschen
+.scannerwork
