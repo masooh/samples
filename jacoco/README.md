@@ -2,15 +2,15 @@
 
 Generate Coverage Report: `mvn package`
 - Report is in `target/site/jacoco/index.html`
-- execution data: `target/jacoco.exec` 
+- execution data: `target/jacoco.exec`
 
 `mvn test`
 - only produces `target/jacoco.exec`
- 
+
 
 ## How does it work?
 
-Modification of `argLine` Parameter which is used by 
+Modification of `argLine` Parameter which is used by
 [surefire:test](http://maven.apache.org/surefire/maven-surefire-plugin/test-mojo.html).
 
 ```
@@ -54,10 +54,10 @@ Minimal working Sonar Scanner `sonar-scanner -Dsonar.projectKey=jacoco -Dsonar.s
 More properties are passed via [sonar-project.properties](sonar-project.properties). Start Scanner without parameters `sonar-scanner`.
 
 ## Hint for mixed Java and Groovy test
-While analysing the source files the SurefireSensor only looks for Java files and the GroovySurefireSensor only for Groovy 
+While analysing the source files the SurefireSensor only looks for Java files and the GroovySurefireSensor only for Groovy
 files. As the surefire report for both is in the same directory (`target/surefire-reports`) both sensor get also the reports of
  tests in the other language. You can see in the log:
- 
+
 ```
 17:29:45.768 INFO: Sensor GroovySurefireSensor [groovy]
 17:29:45.769 INFO: parsing /home/masooh/github/samples/jacoco/target/surefire-reports
@@ -68,6 +68,9 @@ files. As the surefire report for both is in the same directory (`target/surefir
 17:29:45.851 INFO: parsing [/home/masooh/github/samples/jacoco/target/surefire-reports]
 17:29:45.858 DEBUG: Class not found in resource cache : com.github.masooh.samples.jacoco.CalcMinusGroovyTest
 17:29:45.858 WARN: Resource not found: com.github.masooh.samples.jacoco.CalcMinusGroovyTest
-``` 
+```
 
 Nevertheless the result is correct as both tests are added by their Sensor to Sonar.
+
+The tests between Groovy and Java cannot be split on directory level. Both are compiled to `target/test-classes`. As they are
+merged here you can't split them later

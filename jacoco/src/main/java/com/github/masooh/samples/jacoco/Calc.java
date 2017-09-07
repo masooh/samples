@@ -6,6 +6,9 @@ public class Calc {
     }
 
     public int minus(int a, int b) {
+        if (b > a) {
+            throw new UnsupportedOperationException("cant handle negative values");
+        }
         return a - b;
     }
 }
