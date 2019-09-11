@@ -1,62 +1,67 @@
 package com.example.spring.contexthierarchy.application.hierarchy;
 
-import java.util.Arrays;
+import static org.hamcrest.CoreMatchers.containsString;
+import static org.junit.Assert.assertNotNull;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.ContextHierarchy;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
 
-import com.example.spring.contexthierarchy.config.AppConfig1;
-import com.example.spring.contexthierarchy.config.EmptyConfig;
+import com.example.spring.contexthierarchy.application.ContextHelper;
+import com.example.spring.contexthierarchy.application.testbase.empty.EmptyBootApplication;
+import com.example.spring.contexthierarchy.config.ConfigOne;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@AutoConfigureMockMvc
 @ContextHierarchy({
-        @ContextConfiguration(name = "app", classes = Application.class),
-        @ContextConfiguration(name = "config1", classes = AppConfig1.class), // config1 has app as parent
-        @ContextConfiguration(name = "empty", classes = EmptyConfig.class), // speed up with empty config as config1 does not getWebMergedContextConfiguration and can be reused
+        @ContextConfiguration(name = "emptyApp", classes = EmptyBootApplication.class),
+        @ContextConfiguration(name = "configOne", classes = ConfigOne.class),
+        @ContextConfiguration(name = "app", classes = Application.class)
+//        @ContextConfiguration(name = "empty", classes = EmptyConfig.class), // speed up with empty config as config1 does not
+        // getWebMergedContextConfiguration and can be reused
 })
-public class AppConfig1Test {
+public class AppConfig1Test implements ContextHelper {
 
     @Autowired
     ApplicationContext applicationContext;
 
-    //    @Autowired
-    //    private MockMvc mockMvc;
+    @Override
+    public ApplicationContext getApplicationContext() {
+        return applicationContext;
+    }
+
+    @Autowired
+    private MockMvc mockMvc;
 
     @Test
     public void contextLoads() {
-        beanCount("stringApp");
-        beanCount("stringOne");
-        beanCount("stringTwo");
+        beanHierarchyStats();
+        beanCount("app");
+        beanCount("one");
+        beanCount("two");
+        beanCount("dummyController");
     }
 
-    //    @Test
-    //    public void controllerReturnsDummy() throws Exception {
-    //        this.mockMvc.perform(get("/")).andDo(print()).andExpect(status().isOk())
-    //                .andExpect(content().string(containsString("root")));
-    //    }
-
-    private void beanCount(String bean) {
-        final StringBuilder builder = new StringBuilder();
-        beanCount(bean, applicationContext, builder);
-        System.out.println(builder);
+    @Test
+    public void dummyControllerPresent() {
+        assertNotNull(applicationContext.getBean(DummyController.class));
     }
 
-    private void beanCount(String bean, ApplicationContext applicationContext, StringBuilder buffer) {
-        long count = Arrays.stream(applicationContext.getBeanDefinitionNames()).filter(name -> name.equals(bean))
-                .count();
-
-        buffer.append(bean + ": " + count);
-
-        if (applicationContext.getParent() != null) {
-            buffer.append(", ");
-            beanCount(bean, applicationContext.getParent(), buffer);
-        }
+    @Test
+    public void controllerReturnsDummy() throws Exception {
+        this.mockMvc.perform(get("/")).andDo(print()).andExpect(status().isOk())
+                .andExpect(content().string(containsString("root")));
     }
 }

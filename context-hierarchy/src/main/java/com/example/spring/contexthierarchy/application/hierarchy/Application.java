@@ -12,9 +12,8 @@ public class Application {
     }
 
     @Bean
-    public String stringApp() throws InterruptedException {
-        System.err.println("Creating stringApp");
-        return "stringApp";
+    public String app() throws InterruptedException {
+        return "app";
     }
 
 }

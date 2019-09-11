@@ -1,4 +1,4 @@
-package com.example.spring.contexthierarchy.application.hierarchyeextend.hierarchy;
+package com.example.spring.contexthierarchy.application.hierarchywithinheritance;
 
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;

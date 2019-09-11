@@ -1,4 +1,4 @@
-package com.example.spring.contexthierarchy.application.hierarchyeextend.hierarchy;
+package com.example.spring.contexthierarchy.application.hierarchywithinheritance;
 
 import java.util.Arrays;
 

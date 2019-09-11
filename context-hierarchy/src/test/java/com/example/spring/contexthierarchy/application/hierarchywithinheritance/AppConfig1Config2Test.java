@@ -1,4 +1,4 @@
-package com.example.spring.contexthierarchy.application.hierarchyeextend.hierarchy;
+package com.example.spring.contexthierarchy.application.hierarchywithinheritance;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -35,8 +35,8 @@ public class AppConfig1Config2Test extends TestBase {
         beanCount("stringApp");
         beanCount("stringOne");
         beanCount("stringTwo");
-        System.out.println(applicationContext.getBean("stringApp"));
-        System.out.println(applicationContext.getBean("stringOne"));
+        System.out.println(applicationContext.getBean("app"));
+        System.out.println(applicationContext.getBean("one"));
         System.out.println(applicationContext.getBean("stringTwo"));
     }
 
