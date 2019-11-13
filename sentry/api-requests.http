@@ -1,0 +1,49 @@
+# For a quick start check out our HTTP Requests collection (Tools|HTTP Client|Open HTTP Requests Collection).
+#
+# Following HTTP Request Live Templates are available:
+# * 'gtrp' and 'gtr' create a GET request with or without query parameters;
+# * 'ptr' and 'ptrp' create a POST request with a simple or parameter-like body;
+# * 'mptr' and 'fptr' create a POST request to submit a form with a text or file field (multipart/form-data);
+
+# Create Release
+POST http://{{host}}/api/0/organizations/sentry/releases/
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "projects": [
+    "java"
+  ],
+  "version": "api-3.3"
+}
+
+> {%
+
+    client.test("Request executed successfully", function() {
+        client.assert(response.status === 208, "Response status is not 200");
+    });
+%}
+
+### Update Release
+PUT /api/0/organizations/sentry/releases/api-3.1/
+Host: localhost:9000
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "ref": "deadbeef1337"
+}
+
+### Resolve issue
+PUT http://{{host}}/api/0/issues/4/
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "status": "resolved",
+  "statusDetails": {
+    "inRelease": "api-3.3"
+  }
+}
+
+###
