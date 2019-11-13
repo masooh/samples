@@ -13,7 +13,4 @@ jobs:
       - run: mvn --batch-mode --show-version -f spock test
       - uses: docker://python:3
         with:
-          args: ls -l && pwd && ls -l /
-      - uses: docker://python:3
-        with:
           args: python3 -c "import urllib.request; exec(urllib.request.urlopen('https://report.ci/upload.py').read(), globals())"
